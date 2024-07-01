@@ -16,6 +16,7 @@ export default function App() {
         );
 
         const result = await response.json();
+        ``;
         console.log(result);
 
         setImageUrl(result.data.images.original.url);

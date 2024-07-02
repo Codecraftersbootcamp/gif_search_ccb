@@ -1,14 +1,13 @@
 * {
-  /* outline: dotted 2px red; */
-  box-sizing: border-box;
   margin: 0;
+  /* outline: 2px red dotted; */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 .container {
-  background-color: orange;
   min-height: 100vh;
+  background-color: orange;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,63 +16,59 @@
 }
 
 .heading {
-  text-shadow: 2px 2px black;
   color: whitesmoke;
   font-size: 3rem;
+  text-shadow: 2px 2px black;
 }
 
-.gif-container {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: center;
-}
-
-.gif-search-term {
-  font-weight: 600;
+.search-term {
   font-size: 1.5rem;
+  font-weight: 800;
 }
 
-.gif-image {
-  border: solid black 2px;
+.results-image {
   min-width: 500px;
   height: 400px;
+  border: black 2px solid;
   border-radius: 8px;
-  box-shadow: 2px 2px gray;
-  transition: transform 0.3s ease;
-  object-fit: contain;
   background-color: whitesmoke;
+  transition: transform 0.3s ease; /* add this*/
 }
 
-.gif-image:hover {
-  transform: scale(1.04);
+/* this */
+.results-image:hover {
+  transform: scale(1.05);
 }
 
-.form-container {
+.input-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  min-width: 500px;
+  width: 500px;
 }
 
 .search-input {
-  border-radius: 8px;
   padding: 1rem;
-  border: none;
+  font-size: 1rem;
   font-weight: bold;
+  border-radius: 8px;
+  border: none;
 }
 
 .search-button {
-  padding: 0.8rem;
-  border-radius: 8px;
-  border: none;
   background-color: black;
-  color: whitesmoke;
-  font-weight: bold;
-  font-size: 1rem;
+  padding: 0.8rem;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 800;
+  border-radius: 0.5rem;
+  border: none;
+}
+
+.search-button:hover {
   cursor: pointer;
 }
 
 .search-button:active {
-  scale: 0.97;
+  scale: 0.98;
 }

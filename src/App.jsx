@@ -2,72 +2,78 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 export default function App() {
-  const [searchTerm, setSearchTerm] = useState("");
+  // 3. image url state
+  const [imageUrl, setImageUrl] = useState("");
+  //  7. create search text state
+  const [searchText, setSearchText] = useState(""); // do this
 
-  const [imageUrl, setImageUrl] = useState(null);
-
+  //   11. create an isSearching state
   const [isSearching, setIsSearching] = useState(false);
 
+  //   4. useEffect that will execute after the first render
   useEffect(() => {
-    async function fetchInitialImage() {
+    // 5. declare the first gif fetching function
+    async function fetchFirstGif() {
       try {
         const response = await fetch(
-          `https://api.giphy.com/v1/gifs/translate?api_key=WXpAvdBjzbmpAFOxxxViPoa1GIrsVGRD&s=cats`
+          "https://api.giphy.com/v1/gifs/translate?api_key=WXpAvdBjzbmpAFOxxxViPoa1GIrsVGRD&s=dogs"
         );
 
         const result = await response.json();
         console.log(result);
-
         setImageUrl(result.data.images.original.url);
       } catch (error) {
-        console.error(error.message);
+        console.log(error.message);
       }
     }
 
-    fetchInitialImage();
+    //6. call the function
+    fetchFirstGif();
   }, []);
 
-  async function searchImage(e) {
+  async function handleGifSearch(e) {
     try {
+      // 10. prevent default submit behavior
       e.preventDefault();
-
       setIsSearching(true);
+
+      if (searchText.trim() === "") return;
+
       const response = await fetch(
-        `https://api.giphy.com/v1/gifs/translate?api_key=WXpAvdBjzbmpAFOxxxViPoa1GIrsVGRD&s=${searchTerm}`
+        `https://api.giphy.com/v1/gifs/translate?api_key=WXpAvdBjzbmpAFOxxxViPoa1GIrsVGRD&s=${searchText}`
       );
 
       const result = await response.json();
-      console.log(result);
-
       setImageUrl(result.data.images.original.url);
       setIsSearching(false);
     } catch (error) {
-      console.error(error.message);
+      console.log(error.message);
     }
   }
 
   return (
-    <main className="container">
+    // 1. begin here
+    // 2. styling
+    <div className="container">
       <h1 className="heading">GIF Search!</h1>
 
-      <div className="gif-container">
-        <p className=" gif-search-term">
-          Search Result for : {searchTerm ? searchTerm : "Cats"}
-        </p>
-        <img className="gif-image" src={imageUrl} alt="" />
-      </div>
+      <p className="search-term">Search results for: </p>
 
-      <form className="form-container" onSubmit={searchImage}>
+      <img className="results-image" src={imageUrl} alt="" />
+
+      {/* 9. handle submit event */}
+      <form onSubmit={handleGifSearch} className="input-form">
         <input
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          // 8. giv it a value and an onchange handler
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
           className="search-input"
           type="text"
         />
         <button className="search-button">
-          {isSearching ? "Searching..." : "Search"}
+          {isSearching ? "..." : "Search"}
         </button>
       </form>
-    </main>
+    </div>
   );
 }
